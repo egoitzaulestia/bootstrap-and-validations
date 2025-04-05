@@ -42,13 +42,14 @@ form.addEventListener("submit", (e) => {
     }, 3000);
   } else {
     message.className = 'alert alert-success col-md-3'
-    message.innerHTML = 'Success';
-    form.reset();
+    message.innerHTML = 'Usuario creado correctamente';
+    // form.reset();
+    form.innerHTML = '';
     setTimeout(function() {
       message.className = '';
       message.innerHTML = "";
       successChangeURL(urlUsers);
-    }, 1500);
+    }, 3000);
   }
 
   
@@ -93,5 +94,5 @@ const validateEmail = (email) => {
 }
 
 const validatePassword = (password) => {
-  
+
 }
