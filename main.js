@@ -1,10 +1,10 @@
 // 1. Guarda la información recogida de cada uno de los usuarios en localStorage.
 // 2. Implementa validación que obligue a rellenar todos los campos.
 // 3. Implementa una validación para el correo.
-//TODO: 4. Implementa una validación que comprueba que la contraseña 1 es la misma que la contraseña 2.
-//TODO: 5. Implementa una validación de contraseña.
-//TODO: 6. Por cada validación que no se cumpla muestra un mensaje durante 3 segundos y que después desaparezca.
-//TODO: 7. Al terminar de rellenar los datos del formulario correctamente muestra un mensaje durante 3 segundos que muestre “Usuario creado correctamente” y redirige a la vista Usuarios.
+// 4. Implementa una validación que comprueba que la contraseña 1 es la misma que la contraseña 2.
+//FIXME: 5. Implementa una validación de contraseña. FIXME: añadir mayúsculas 
+// 6. Por cada validación que no se cumpla muestra un mensaje durante 3 segundos y que después desaparezca.
+// 7. Al terminar de rellenar los datos del formulario correctamente muestra un mensaje durante 3 segundos que muestre “Usuario creado correctamente” y redirige a la vista Usuarios.
 //TODO: 8. Muestra los mensajes utilizando los alerts de Bootstrap.
 
 // 1. Guarda la información recogida de cada uno de los usuarios en localStorage.
@@ -12,6 +12,8 @@
 const urlUsers = './users.html';
 
 const form = document.getElementById("formData");
+
+const userDataBase = []
 
 // // Load exiting data on page load
 // document.addEventListener('DOMContentLoaded', () => {
@@ -25,74 +27,135 @@ form.addEventListener("submit", (e) => {
   const userVerifyPassword = document.querySelector("#inputVerifyPassword").value;
   const message = document.querySelector('#message')
 
-  if (userName === "" || userEmail === "" || userPassword === "" || userVerifyPassword === ""
-  ) {
+  if (userName === "" || userEmail === "" || userPassword === "" || userVerifyPassword === "") {
+    // If any field is empty, we show an launch (alert-danger) to the user in the page
     message.className = 'alert alert-danger col-md-3'
     message.innerHTML = 'Please fill all the fields';
+
     setTimeout(function() {
       message.className = '';
       message.innerHTML = "";
     }, 3000);
+
   } else if (!validateEmail(userEmail)) {
+    // If the email doesn't have the correct format, we launch an error (alert-danger) to the user in the page
     message.className = 'alert alert-danger col-md-3'
     message.innerHTML = 'Please introduce a correct email';
+
     setTimeout(function() {
       message.className = '';
       message.innerHTML = "";
     }, 3000);
+
+  } else if (!validatePassword(userPassword)) {
+    // If the passwords doesn't mathc, we launch an error (alert-danger) to the user in the page
+    // message.className = 'alert alert-danger col-md-3'
+    // message.innerHTML = 'The passwords do not match';
+
+    // setTimeout(function() {
+    //   message.className = '';
+    //   message.innerHTML = "";
+    // }, 3000);
+
+  } else if (!passwordMatch(userPassword, userVerifyPassword)) {
+      // If the passwords doesn't mathc, we launch an error (alert-danger) to the user in the page
+      message.className = 'alert alert-danger col-md-3'
+      message.innerHTML = 'The passwords do not match';
+  
+      setTimeout(function() {
+        message.className = '';
+        message.innerHTML = "";
+      }, 3000);
+  
   } else {
     message.className = 'alert alert-success col-md-3'
-    message.innerHTML = 'Usuario creado correctamente';
-    // form.reset();
+    message.innerHTML = 'User created successfully';
     form.innerHTML = '';
+
     setTimeout(function() {
       message.className = '';
       message.innerHTML = "";
-      successChangeURL(urlUsers);
+      changeURL(urlUsers);
     }, 3000);
-  }
 
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        name: userName,
+        email: userEmail,
+        password: userPassword,
+      })
+    );
   
-  // else {
-  //   message.className = 'alert alert-success col-md-3'
-  //   message.innerHTML = 'Please introduce a strong password';
-  //   setTimeout(function() {
-  //     message.className = '';
-  //     message.innerHTML = "";
-  //   }, 3000);
-  // }
+    const userData = JSON.parse(localStorage.getItem("user"));
+    console.log(userData);
+    userDataBase.push(userDataBase)
+    console.log(userDataBase)
 
+  }
 
   // console.log(userName);
   // console.log(userEmail);
   // console.log(userPassword);
   // console.log(userVerifyPassword);
-
-  localStorage.setItem(
-    "user",
-    JSON.stringify({
-      name: userName,
-      email: userEmail,
-      password: userPassword,
-    })
-  );
-
-  const userData = JSON.parse(localStorage.getItem("user"));
-  console.log(userData);
   
 });
 
-const successChangeURL = (url) => {
+// URL - successChangeURL function: change the URL
+const changeURL = (url) => {
   // return window.location.href = url;
   return window.location.replace(url);
 }
 
+// EMAIL - validateEmail function
 const validateEmail = (email) => {
   return email.match(
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   );
 }
 
-const validatePassword = (password) => {
+const passwordMatch = (password1, password2) => {
+  if (password1 !== password2) {
+    return false
+  } else {
+    return true
+  }
+}
 
+const validatePassword = (password) => {
+  let errors = [];
+  if (password.length < 8) {
+    errors.push("Your password must be at least 8 characters");
+    // If the passwords doesn't mathc, we launch an error (alert-danger) to the user in the page
+    message.className = 'alert alert-danger col-md-3'
+    message.innerHTML = 'Your password must be at least 8 characters';
+
+    setTimeout(function() {
+      message.className = '';
+      message.innerHTML = "";
+    }, 3000);
+
+    return false
+  }
+  if (password.search(/[a-z]/i) < 0) {
+    errors.push("Your password must contain at least one letter.");
+
+    message.className = 'alert alert-danger col-md-3'
+    message.innerHTML = 'Your password must contain at least one letter.';
+
+    setTimeout(function() {
+      message.className = '';
+      message.innerHTML = "";
+    }, 3000);
+
+    return false
+  }
+  if (password.search(/[0-9]/) < 0) {
+    errors.push("Your password must contain at least one digit."); 
+  }
+  if (errors.length > 0) {
+    // alert(errors.join("\n"));
+    return false;
+  }
+  return true;
 }
