@@ -78,19 +78,24 @@ form.addEventListener("submit", (e) => {
       changeURL(urlUsers);
     }, 3000);
 
-    localStorage.setItem(
-      "user",
-      JSON.stringify({
-        name: userName,
-        email: userEmail,
-        password: userPassword,
-      })
-    );
+    let userData = JSON.parse(localStorage.getItem('users')) || [];
+
+    userData.push({ userName, userEmail, userPassword });
+    
+    localStorage.setItem('users', JSON.stringify(userData));
+
+    // localStorage.setItem(
+    //   "users",
+    //   JSON.stringify({
+    //     name: userName,
+    //     email: userEmail,
+    //     password: userPassword,
+    //   })
+    // );
   
-    const userData = JSON.parse(localStorage.getItem("user"));
-    console.log(userData);
-    userDataBase.push(userDataBase)
-    console.log(userDataBase)
+    // console.log(userData);
+    // userDataBase.push(userDataBase)
+    // console.log(userDataBase)
 
   }
 
