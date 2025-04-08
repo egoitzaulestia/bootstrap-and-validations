@@ -5,9 +5,8 @@
 //FIXME: 5. Implementa una validación de contraseña. FIXME: añadir mayúsculas 
 // 6. Por cada validación que no se cumpla muestra un mensaje durante 3 segundos y que después desaparezca.
 // 7. Al terminar de rellenar los datos del formulario correctamente muestra un mensaje durante 3 segundos que muestre “Usuario creado correctamente” y redirige a la vista Usuarios.
-//TODO: 8. Muestra los mensajes utilizando los alerts de Bootstrap.
+// 8. Muestra los mensajes utilizando los alerts de Bootstrap.
 
-// 1. Guarda la información recogida de cada uno de los usuarios en localStorage.
 
 const urlUsers = './users.html';
 

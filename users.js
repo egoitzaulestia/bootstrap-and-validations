@@ -1,27 +1,20 @@
-const userData = JSON.parse(localStorage.getItem('users'));
+const usersDB = JSON.parse(localStorage.getItem('users'));
 
-console.log(userData[0].userPassword);
+console.log(usersDB[0].userPassword);
 
 const cards = document.querySelector('#cards');
-cards.innerHTML = ''
+cards.innerHTML = '';
 
-const card = document.createElement('div')
+usersDB.forEach(user => {
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.style.width = '18rem';
 
-const cardWrapper = document.createElement('div')
-
-// userData.forEach(user => {
-//     const card = docuement.createElement('div')
-    
-// });
-
-card.innerHTML = `<div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">${userData[0].userName}</h5>
-                        <p class="card-text">${userData[0].userEmail}</p>
+    card.innerHTML = `<div class="card-body">
+                        <h5 class="card-title">${user.userName}</h5>
+                        <p class="card-text">${user.userEmail}</p>
                         <a href="#" class="btn btn-primary">Delete user</a>
-                    </div>
-                </div>`
+                    </div>`;
 
-// card.innerHTML = 'Hello world'
-
-cards.appendChild(card)
+    cards.appendChild(card);
+});
