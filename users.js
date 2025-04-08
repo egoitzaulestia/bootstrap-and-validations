@@ -22,13 +22,14 @@ usersDB.forEach(user => {
     cardBody.appendChild(cardUserEmail);
 
     const deletBtn = document.createElement('button');
-    
+    const att = document.createAttribute('href');
+    att.value = '#';
+    deletBtn.setAttributeNode(att);
+    deletBtn.classList.add('btn', 'btn-primary')
+    deletBtn.textContent = 'Delete user'
+    cardBody.appendChild(deletBtn);
 
-    card.innerHTML = `<div class="card-body">
-                        <h5 class="card-title">${user.userName}</h5>
-                        <p class="card-text">${user.userEmail}</p>
-                        <a href="#" class="btn btn-primary">Delete user</a>
-                    </div>`;
-
+    card.appendChild(cardBody)
     cards.appendChild(card);
+
 });

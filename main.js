@@ -47,16 +47,10 @@ form.addEventListener("submit", (e) => {
     }, 3000);
 
   } else if (!validatePassword(userPassword)) {
+    // If it's an invalid password, we launch an error (alert-danger) to the user in the page
 
   } else if (!passwordMatch(userPassword, userVerifyPassword)) {
-      // If the passwords doesn't mathc, we launch an error (alert-danger) to the user in the page
-      message.className = 'alert alert-danger col-md-3'
-      message.innerHTML = 'The passwords do not match';
-  
-      setTimeout(function() {
-        message.className = '';
-        message.innerHTML = "";
-      }, 3000);
+    // If the passwords doesn't match, we launch an error (alert-danger) to the user in the page
   
   } else {
     message.className = 'alert alert-success col-md-3'
@@ -92,9 +86,20 @@ const validateEmail = (email) => {
 }
 
 const passwordMatch = (password1, password2) => {
+  // If the passwords doesn't mathc, we launch an error (alert-danger) to the user in the page
   if (password1 !== password2) {
+    message.className = 'alert alert-danger col-md-3'
+    message.innerHTML = 'The passwords do not match';
+
+    setTimeout(function() {
+      message.className = '';
+      message.innerHTML = "";
+    }, 3000);
+
     return false
+
   } else {
+
     return true
   }
 }
@@ -104,7 +109,7 @@ const validatePassword = (password) => {
 
   if (password.length < 8) {
     errors.push("Your password must be at least 8 characters");
-    // If the passwords doesn't mathc, we launch an error (alert-danger) to the user in the page
+    
     message.className = 'alert alert-danger col-md-3'
     message.innerHTML = 'Your password must be at least 8 characters';
 
