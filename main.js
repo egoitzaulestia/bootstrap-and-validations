@@ -47,14 +47,6 @@ form.addEventListener("submit", (e) => {
     }, 3000);
 
   } else if (!validatePassword(userPassword)) {
-    // If the passwords doesn't mathc, we launch an error (alert-danger) to the user in the page
-    // message.className = 'alert alert-danger col-md-3'
-    // message.innerHTML = 'The passwords do not match';
-
-    // setTimeout(function() {
-    //   message.className = '';
-    //   message.innerHTML = "";
-    // }, 3000);
 
   } else if (!passwordMatch(userPassword, userVerifyPassword)) {
       // If the passwords doesn't mathc, we launch an error (alert-danger) to the user in the page
@@ -83,26 +75,7 @@ form.addEventListener("submit", (e) => {
     
     localStorage.setItem('users', JSON.stringify(userData));
 
-    // localStorage.setItem(
-    //   "users",
-    //   JSON.stringify({
-    //     name: userName,
-    //     email: userEmail,
-    //     password: userPassword,
-    //   })
-    // );
-  
-    // console.log(userData);
-    // userDataBase.push(userDataBase)
-    // console.log(userDataBase)
-
   }
-
-  // console.log(userName);
-  // console.log(userEmail);
-  // console.log(userPassword);
-  // console.log(userVerifyPassword);
-  
 });
 
 // URL - successChangeURL function: change the URL
@@ -128,6 +101,7 @@ const passwordMatch = (password1, password2) => {
 
 const validatePassword = (password) => {
   let errors = [];
+
   if (password.length < 8) {
     errors.push("Your password must be at least 8 characters");
     // If the passwords doesn't mathc, we launch an error (alert-danger) to the user in the page
@@ -141,6 +115,7 @@ const validatePassword = (password) => {
 
     return false
   }
+
   if (password.search(/[a-z]/i) < 0) {
     errors.push("Your password must contain at least one letter.");
 
@@ -154,12 +129,15 @@ const validatePassword = (password) => {
 
     return false
   }
+
   if (password.search(/[0-9]/) < 0) {
     errors.push("Your password must contain at least one digit."); 
   }
+
   if (errors.length > 0) {
     // alert(errors.join("\n"));
     return false;
   }
+
   return true;
 }
