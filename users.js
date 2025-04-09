@@ -3,8 +3,13 @@ const usersDB = JSON.parse(localStorage.getItem("users"));
 const cards = document.querySelector("#cards");
 cards.innerHTML = "";
 
+let cardId = 1;
+
 usersDB.forEach((user) => {
   const card = document.createElement("div");
+  const attUserId = document.createAttribute('id');
+  attUserId.value = `card${cardId}`;
+  card.setAttributeNode(attUserId)
   card.classList.add("card");
   card.style.width = "18rem";
 
@@ -34,11 +39,19 @@ usersDB.forEach((user) => {
 
   card.appendChild(cardBody);
   cards.appendChild(card);
+
+  cardId++
 });
 
-const deleteUser = (user) => {
-  const deleteUserBtn = pass;
-  const usersDB = JSON.parse(localStorage.getItem("users"));
-};
+// //TODO: deleteUser()
+// const deleteUser = () => {
+//   const deleteUserBtn = document.querySelector('#deleteBtn');
+//   // let deteteId;
+//   // const idUserToDelete = document.querySelector(`#card${deteteId}`)
+//   usersDB.forEach(userId => {
+//     // if ()
+//   });
 
-document.addEventListener("click", deleteUser);
+// };
+
+// document.addEventListener("click", deleteUser);

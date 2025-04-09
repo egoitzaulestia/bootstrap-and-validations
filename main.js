@@ -13,8 +13,7 @@ const form = document.getElementById("formData");
 
 const userDataBase = [];
 
-// // Load exiting data on page load
-// document.addEventListener('DOMContentLoaded', () => {
+let userId = 1;
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -69,9 +68,11 @@ form.addEventListener("submit", (e) => {
 
     let userData = JSON.parse(localStorage.getItem("users")) || [];
 
-    userData.push({ userName, userEmail, userPassword });
-
+    userData.push({ userId, userName, userEmail, userPassword });
+    
     localStorage.setItem("users", JSON.stringify(userData));
+
+    userId++
   }
 });
 
