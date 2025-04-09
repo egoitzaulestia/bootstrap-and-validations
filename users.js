@@ -1,35 +1,44 @@
-const usersDB = JSON.parse(localStorage.getItem('users'));
+const usersDB = JSON.parse(localStorage.getItem("users"));
 
-const cards = document.querySelector('#cards');
-cards.innerHTML = '';
+const cards = document.querySelector("#cards");
+cards.innerHTML = "";
 
-usersDB.forEach(user => {
-    const card = document.createElement('div');
-    card.classList.add('card');
-    card.style.width = '18rem';
+usersDB.forEach((user) => {
+  const card = document.createElement("div");
+  card.classList.add("card");
+  card.style.width = "18rem";
 
-    const cardBody = document.createElement('div');
-    cardBody.classList.add('card-body');
+  const cardBody = document.createElement("div");
+  cardBody.classList.add("card-body");
 
-    const cardUserName = document.createElement('h5');
-    cardUserName.classList.add('card-title');
-    cardUserName.textContent = user.userName;
-    cardBody.appendChild(cardUserName);
+  const cardUserName = document.createElement("h5");
+  cardUserName.classList.add("card-title");
+  cardUserName.textContent = user.userName;
+  cardBody.appendChild(cardUserName);
 
-    const cardUserEmail = document.createElement('p');
-    cardUserEmail.classList.add('card-text');
-    cardUserEmail.textContent = user.userEmail;
-    cardBody.appendChild(cardUserEmail);
+  const cardUserEmail = document.createElement("p");
+  cardUserEmail.classList.add("card-text");
+  cardUserEmail.textContent = user.userEmail;
+  cardBody.appendChild(cardUserEmail);
 
-    const deletBtn = document.createElement('button');
-    const att = document.createAttribute('href');
-    att.value = '#';
-    deletBtn.setAttributeNode(att);
-    deletBtn.classList.add('btn', 'btn-primary')
-    deletBtn.textContent = 'Delete user'
-    cardBody.appendChild(deletBtn);
+  const deletBtn = document.createElement("button");
+  const attHref = document.createAttribute("href");
+  attHref.value = "#";
+  deletBtn.setAttributeNode(attHref);
+  const attId = document.createAttribute("id");
+  attId.value = "deleteBtn";
+  deletBtn.setAttributeNode(attId);
+  deletBtn.classList.add("btn", "btn-primary");
+  deletBtn.textContent = "Delete user";
+  cardBody.appendChild(deletBtn);
 
-    card.appendChild(cardBody)
-    cards.appendChild(card);
-
+  card.appendChild(cardBody);
+  cards.appendChild(card);
 });
+
+const deleteUser = (user) => {
+  const deleteUserBtn = pass;
+  const usersDB = JSON.parse(localStorage.getItem("users"));
+};
+
+document.addEventListener("click", deleteUser);
