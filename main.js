@@ -68,11 +68,21 @@ form.addEventListener("submit", (e) => {
 
     let userData = JSON.parse(localStorage.getItem("users")) || [];
 
+    // Determine a unique userId:
+    // If there are users, take the highest current userId and increment it. Otherwise, start with 1.
+    let userId;
+    if (userData.length > 0) {
+      // Get the maximum userId from existing users
+      const maxId = Math.max(...userData.map(user => user.userId));
+      userId = maxId + 1;
+    } else {
+      userId = 1;
+    }
+    
     userData.push({ userId, userName, userEmail, userPassword });
     
     localStorage.setItem("users", JSON.stringify(userData));
 
-    userId++
   }
 });
 
